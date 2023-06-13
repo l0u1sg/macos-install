@@ -5,7 +5,7 @@ My installation script for my MacOS machines
 ## Usage
 
 ```bash
-bash <(curl -s https://gitea.louisgallet.fr/lgallet/macos-install/macos-setup.sh)
+bash <(curl -s https://gitea.louisgallet.fr/lgallet/macos-install/raw/branch/main/macos-setup.sh)
 ```
 
 ## What it does
