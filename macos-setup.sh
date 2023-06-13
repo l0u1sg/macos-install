@@ -1,10 +1,26 @@
 #! /usr/bin/env bash
 # Setup script for setting up a new macos machine
 
+# Check if system is macos
+if [ "$(uname)" != "Darwin" ]; then
+    echo "Sorry bro, this script is only for macos"
+    exit 1
+fi
+
 echo "Starting setup"
 
-# Install xcode CLI
-xcode-select --install
+# Check if xcode CLI is installed
+if ! xcode-select --print-path &> /dev/null; then
+    echo "Installing xcode CLI"
+    xcode-select --install &> /dev/null
+    # Wait until xcode CLI is installed
+    until xcode-select --print-path &> /dev/null; do
+        sleep 5
+    done
+    echo "Xcode CLI installed"
+else
+    echo "Xcode CLI already installed"
+fi
 
 # Install homebrew
 # Check if homebrew is installed
@@ -24,8 +40,15 @@ PACKAGES=(
     zsh
 )
 
-echo "Installing packages..."
-brew install ${PACKAGES[@]}
+# Check if packages are installed
+for package in ${PACKAGES[@]}; do
+    if brew list $package > /dev/null 2>&1; then
+        echo "$package already installed"
+    else
+        echo "Installing $package"
+        brew install $package
+    fi
+done
 
 # Link readline
 brew link --force readline
@@ -51,7 +74,14 @@ CASKS=(
     nordvpn
 )
 
-echo "Installing cask apps..."
-brew install --cask ${CASKS[@]}
+# Check if cask apps are installed
+for cask in ${CASKS[@]}; do
+    if brew list --cask $cask > /dev/null 2>&1; then
+        echo "$cask already installed"
+    else
+        echo "Installing $cask"
+        brew install --cask $cask
+    fi
+done
 
 echo "Macbook setup complete"
