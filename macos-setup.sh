@@ -26,7 +26,7 @@ fi
 # Check if homebrew is installed
 if test ! $(which brew); then
     echo "Installing homebrew"
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 # Update homebrew
@@ -83,5 +83,26 @@ for cask in ${CASKS[@]}; do
         brew install --cask $cask
     fi
 done
+
+# Ask user if they want to add install apps to dock
+echo "Do you want to add apps to dock? (y/n)"
+read -r response
+if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
+    # Check if dockutil is installed
+    if ! brew list dockutil > /dev/null 2>&1; then
+        echo "Installing dockutil"
+        brew install dockutil
+    fi
+
+    echo "Adding apps to dock"
+    # Add apps to dock
+    dockutil --no-restart --add "/Applications/Visual Studio Code.app"
+    dockutil --no-restart --add "/Applications/iTerm.app"
+    dockutil --no-restart --add "/Applications/1Password 7.app"
+    dockutil --no-restart --add "/Applications/Notion.app"
+    dockutil --no-restart --add "/Applications/Discord.app"
+    dockutil --no-restart --add "/Applications/Arc.app"
+    killall Dock
+fi
 
 echo "Macbook setup complete"
