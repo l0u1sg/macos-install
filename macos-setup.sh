@@ -72,6 +72,7 @@ CASKS=(
     arc
     swish
     nordvpn
+    rider
 )
 
 # Check if cask apps are installed
