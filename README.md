@@ -30,3 +30,4 @@ The script installs the following software:
 - [Arc](https://arc.net)
 - [Swish](https://highlyopinionated.co/swish/)
 - [NordVPN](https://nordvpn.com/)
+- [Rider](https://www.jetbrains.com/rider/)
