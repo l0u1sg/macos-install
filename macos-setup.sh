@@ -38,6 +38,10 @@ PACKAGES=(
     git-lfs
     wget
     zsh
+    yubikey-agent
+    gnupg
+    git-flow
+    gh
 )
 
 # Check if packages are installed
@@ -60,9 +64,7 @@ echo "Installing cask..."
 
 CASKS=(
     iterm2
-    visual-studio-code
     1password
-    altserver
     appcleaner
     discord
     iina
@@ -72,7 +74,11 @@ CASKS=(
     arc
     swish
     nordvpn
-    rider
+    jetbrains-toolbox
+    aldente
+    docker
+    maccy
+    gpg-suite-no-mail
 )
 
 # Check if cask apps are installed
@@ -97,7 +103,6 @@ if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]; then
 
     echo "Adding apps to dock"
     # Add apps to dock
-    dockutil --no-restart --add "/Applications/Visual Studio Code.app"
     dockutil --no-restart --add "/Applications/iTerm.app"
     dockutil --no-restart --add "/Applications/1Password 7.app"
     dockutil --no-restart --add "/Applications/Notion.app"
