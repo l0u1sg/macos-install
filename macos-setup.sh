@@ -42,6 +42,7 @@ PACKAGES=(
     gnupg
     git-flow
     gh
+    rcm
 )
 
 # Check if packages are installed
